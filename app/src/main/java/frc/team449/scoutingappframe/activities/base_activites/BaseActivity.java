@@ -1,6 +1,9 @@
 package frc.team449.scoutingappframe.activities.base_activites;
 
 import android.app.Activity;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
+import android.support.annotation.LayoutRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,12 +15,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import frc.team449.scoutingappframe.R;
 import frc.team449.scoutingappframe.helpers.PopupHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
+    private ActivityBaseBinding binding;
 
     @Override
     public void setContentView(int layoutResID){
@@ -30,15 +33,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setContentView(View view) {
         CoordinatorLayout cl = (CoordinatorLayout) getLayoutInflater().inflate(R.layout.base_activity, null);
         super.setContentView(cl);
-        //LinearLayout ll = findViewById(R.id.base_linear);
-        FrameLayout activityContainer = cl.findViewById(R.id.layout_container);
+        FrameLayout activityContainer = cl.findViewById(R.id.layoutContainer);
         activityContainer.addView(view);
         setup(cl);
     }
 
+    protected <T extends ViewDataBinding> T putContentView(@LayoutRes int resId) {
+        ViewDataBinding v = DataBindingUtil.inflate(getLayoutInflater(), resId, binding.layoutContainer, true);
+
+    }
+
     protected CoordinatorLayout setupLayout(int layoutResID, int baseLayout) {
         CoordinatorLayout cl = (CoordinatorLayout) getLayoutInflater().inflate(baseLayout, null);
-        FrameLayout activityContainer = cl.findViewById(R.id.layout_container);
+        FrameLayout activityContainer = cl.findViewById(R.id.layoutContainer);
 
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
 

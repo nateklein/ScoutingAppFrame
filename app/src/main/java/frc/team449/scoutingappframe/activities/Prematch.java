@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import frc.team449.scoutingappframe.R;
 import frc.team449.scoutingappframe.activities.base_activites.BaseActivity;
+import frc.team449.scoutingappframe.databinding.PrematchPageBinding;
 import frc.team449.scoutingappframe.helpers.PopupHelper;
 import frc.team449.scoutingappframe.model.Match;
 
@@ -31,7 +32,9 @@ public class Prematch extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prematch_page);
+        //setContentView(R.layout.prematch_page);
+
+        PrematchPageBinding binding = putContentView(R.layout.prematch_page);
 
         // Creates and sets data trackers to Match values
         scoutNameText = findViewById(R.id.scoutName);

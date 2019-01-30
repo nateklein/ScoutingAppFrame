@@ -10,10 +10,13 @@ package frc.team449.scoutingappframe.model;
 
 
 import android.content.Context;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
+import frc.team449.scoutingappframe.BR;
 import frc.team449.scoutingappframe.R;
 
-public class Match {
+public class Match extends BaseObservable {
 
     private static final Match match = new Match();
 
@@ -82,12 +85,16 @@ public class Match {
         return errors.trim();
     }
 
+    @Bindable
     public String getScoutName() {
         return scoutName;
     }
 
     public void setScoutName(String scoutName) {
-        this.scoutName = scoutName;
+        if (!this.scoutName.equals(scoutName)) {
+            this.scoutName = scoutName;
+            notifyPropertyChanged(BR.scoutName);
+        }
     }
 
     public int getMatchNumber() {
